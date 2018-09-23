@@ -6,13 +6,24 @@ class StudentForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      firstName: props.student.firstName,
-      lastName: props.student.lastName,
-      gpa: props.student.gpa,
-      schoolId: props.student.schoolId
+      firstName: '',
+      lastName: '',
+      gpa: '',
+      schoolId: null
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }  
+
+  componentDidMount () {
+    if (this.props.student) {
+      this.setState({
+        firstName: this.props.student.firstName,
+        lastName: this.props.student.lastName,
+        gpa: this.props.student.gpa,
+        schoolId: this.props.student.schoolId
+      })
+    }
   }
 
   handleChange (evt) {
@@ -23,11 +34,14 @@ class StudentForm extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
-    console.log("About to call updateStudent");
-    console.log(this.props.student.id);
-    console.log(this.state);
-    this.props.updateStudent(this.props.student.id, this.state);
-    
+    console.log("IN HANDLE SUBMIT");
+    if (this.props.createStudent) {
+      console.log("IN CREATE LOOP");
+      this.props.createStudent(this.state);
+    }
+    else {
+      this.props.updateStudent(this.props.student.id, this.state);
+    }
   }
 
   render () {
@@ -45,7 +59,7 @@ class StudentForm extends Component {
           <input name="gpa" value={this.state.gpa} onChange={this.handleChange} />
           <br />
           <label>Enrolled at</label>
-            <select name="schoolId">
+            <select name="schoolId" onChange={this.handleChange}>
               {/* <option value={student.schoolId}>{student.school.name}</option> */}
               {schools.map( school => <option key={school.id} value={school.id}>{school.name}</option>)}
             </select>
