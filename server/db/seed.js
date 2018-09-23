@@ -17,6 +17,7 @@ const createSchools = (num) => {
     newSchool.city = chance.city();
     newSchool.state = chance.state();
     newSchool.zip_code = chance.zip();
+    newSchool.description = chance.paragraph({sentences: 2});
     schools.push(newSchool);
   }
   return schools;
@@ -57,5 +58,3 @@ const syncAndSeed = () => {
 }
 
 syncAndSeed();
-
-module.exports = syncAndSeed;
