@@ -1,32 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteStudent } from '../store';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-const Student = ({ student, deleteStudent }) => {
-  console.log("In component");
-  console.log(student);
+import StudentDetail from './StudentDetail';
+import StudentForm from './StudentForm';
+import { deleteStudent, updateStudent } from '../store';
+
+const Student = ({ student, deleteStudent, updateStudent }) => {
   if ( student ) {
     return (
-      <div className="student">
-        <h2>{student.firstName} {student.lastName}</h2>
-        <div className="studentDetails">
-          <div>Current GPA: {student.gpa}</div>
-        </div>
-        <br />
-        <button type="button" onClick={() => deleteStudent(student)}>Delete Student</button>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/students/:id" render={() => <StudentDetail student={student} deleteStudent={deleteStudent} /> } />
+          <Route path="/students/:id/edit" render={ () => <StudentForm student={student} deleteStudent={deleteStudent} updateStudent={updateStudent} /> } />
+        </Switch>
+      </Router>
     )
   }
   return (<div className="student" />)
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const student = state.students.filter( stud => stud.id === ownProps.match.params.id * 1)
-  return ({ student: student[0] })
+  return ({ student: state.students.filter( stud => stud.id === ownProps.match.params.id * 1)[0] })
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteStudent: (student) => dispatch(deleteStudent(student))
+  deleteStudent: (student) => dispatch(deleteStudent(student)),
+  updateStudent: (id, student) => dispatch(updateStudent(id, student))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student);
