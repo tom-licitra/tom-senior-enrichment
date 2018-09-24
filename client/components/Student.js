@@ -4,16 +4,16 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import StudentDetail from './StudentDetail';
 import StudentForm from './StudentForm';
-import { deleteStudent, updateStudent, createStudent } from '../store';
+import StudentAddForm from './StudentAddForm';
+import { deleteStudent } from '../store';
 
-const Student = ({ student, deleteStudent, updateStudent }) => {
+const Student = ({ student, deleteStudent }) => {
   if ( student ) {
     return (
       <Router>
         <Switch>
-          <Route path="/students/create" component={<div>Hello</div>} />
-          <Route exact path="/students/:id" render={(props) => <StudentDetail props={props} student={student} deleteStudent={deleteStudent} /> } />
-          <Route path="/students/:id/edit" render={ () => <StudentForm student={student} deleteStudent={deleteStudent} updateStudent={updateStudent} /> } />
+          <Route exact path="/students/:id" render={(props) => {return (<StudentDetail props={props} student={student} deleteStudent={deleteStudent} />)} } />
+          <Route exact path="/students/:id/edit" render={(props) => <StudentForm student={student} props={props} /> } />
         </Switch>
       </Router>
     )
@@ -21,8 +21,7 @@ const Student = ({ student, deleteStudent, updateStudent }) => {
   return (
     <Router>
       <Switch>
-        <Route path="/students/create" render={ () => <StudentForm createStudent={createStudent} />} />
-        <div className="student" />
+        <Route path="/students/create" render={(props) => <StudentAddForm props={props} />} />
       </Switch>
     </Router>
   )
@@ -33,9 +32,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteStudent: (student) => dispatch(deleteStudent(student)),
-  updateStudent: (id, student) => dispatch(updateStudent(id, student)),
-  createStudent: (data) => dispatch(createStudent(data))
+  deleteStudent: (student) => dispatch(deleteStudent(student))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student);

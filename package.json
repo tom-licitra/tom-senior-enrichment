@@ -39,7 +39,7 @@
     "start": "node ./server",
     "seed": "node ./server/db/seed.js",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/academics nodemon ./server --ignore src/ --ignore dist"
+    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/academics nodemon ./server --ignore client --ignore dist"
   },
   "keywords": [],
   "author": "",

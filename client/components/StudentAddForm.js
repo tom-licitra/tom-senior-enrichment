@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateStudent } from '../store';
+import { createStudent } from '../store';
 
-class StudentForm extends Component {
-  constructor (props) {
-    super(props);
+class StudentAddForm extends Component {
+  constructor () {
+    super();
     this.state = {
-      firstName: props.student.firstName,
-      lastName: props.student.lastName,
-      gpa: props.student.gpa,
-      schoolId: props.student.schoolId
+      firstName: '',
+      lastName: '',
+      gpa: '',
+      schoolId: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,12 +23,16 @@ class StudentForm extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
-    this.props.updateStudent(this.props.student.id, this.state);
-    this.props.history.push(`/students/${this.props.student.id}`);
+    if (!this.state.schoolId) {
+       const { schoolId, ...stateData } = this.state;
+       this.props.createStudent(stateData)
+    }
+    else { this.props.createStudent(this.state) }
+    this.props.history.push('/students');
   }
 
   render () {
-    const { student, schools } = this.props;
+    const { schools } = this.props;
     return (
       <div className="studentForm">
         <form onSubmit={this.handleSubmit}>
@@ -42,10 +46,9 @@ class StudentForm extends Component {
           <input name="gpa" value={this.state.gpa} onChange={this.handleChange} />
           <br />
           <label>Enrolled at</label>
-            <select name="schoolId" defaultValue={student.school ? student.school.id : null} onChange={this.handleChange}>
+            <select name="schoolId" onChange={this.handleChange}>
               <option value={0}>Not enrolled</option>
-              {
-                schools.map( school => { return (
+              {schools.map( school => { return (
                 <option key={school.id} value={school.id}>
                   {school.name}
                 </option>)})
@@ -60,12 +63,11 @@ class StudentForm extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   schools: state.schools,
-  student: ownProps.student,
   history: ownProps.props.history
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateStudent: (id, data) => dispatch(updateStudent(id, data))
+  createStudent: (id, data) => dispatch(createStudent(id, data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentAddForm);
