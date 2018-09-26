@@ -7,7 +7,6 @@ import SchoolForm from './SchoolForm';
 import SchoolAddForm from './SchoolAddForm';
 
 const School = ({school}) => {
-  console.log("In School");
   if (school) {
     return (
       <Router>

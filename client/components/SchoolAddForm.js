@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { updateSchool } from '../store';
+import { createSchool } from '../store';
 
 class SchoolAddForm extends Component {
   constructor (props) {
@@ -30,7 +30,6 @@ class SchoolAddForm extends Component {
   }
 
   render () {
-    // const { school, schools } = this.props;
     return (
       <div className="schoolForm">
         <form onSubmit={this.handleSubmit}>
@@ -64,7 +63,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createSchool: (data) => console.log(data.name)
+  createSchool: (data) => dispatch(createSchool(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolAddForm);

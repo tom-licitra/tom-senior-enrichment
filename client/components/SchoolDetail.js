@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { deleteSchool } from '../store';
+
 const SchoolDetail = ({school, deleteSchool, props}) => {
   return (
     <div className="school">
@@ -12,7 +14,7 @@ const SchoolDetail = ({school, deleteSchool, props}) => {
         <div>Description: {school.description}</div>
       </div>
       <br />
-      <button type="button" onClick={() => deleteSchool(school)}>Delete Student</button>
+      <button type="button" onClick={() => deleteSchool(school)}>Delete School</button>
       <button type="button"><Link to={props.location.pathname + '/edit'}>Edit School</Link></button>
     </div>
   )
@@ -24,7 +26,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteSchool: (school) => console.log(`I could delete ${school.name} if you connect me`)
+  deleteSchool: (school) => dispatch(deleteSchool(school))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolDetail);
