@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 const Schools = ({ schools }) => {
   if (schools.length > 0) {
     return (
       <div id="schools">
-        <div className="schoolListItem">{schools[0].name}</div>
-        <div className="schoolListItem">{schools[1].name}</div>
+        <button type="button"><Link to="/schools/create">Add new school</Link></button>
+        {
+        schools.map( school => <div className="schoolListItem" key={school.id}><Link to={`/schools/${school.id}`}>{school.name}</Link></div>)
+        }
       </div>
     )
   }

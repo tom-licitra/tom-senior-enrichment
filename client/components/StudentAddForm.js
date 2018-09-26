@@ -67,7 +67,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createStudent: (id, data) => dispatch(createStudent(id, data))
+  createStudent: (data) => dispatch(createStudent(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentAddForm);

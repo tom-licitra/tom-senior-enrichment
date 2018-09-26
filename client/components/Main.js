@@ -9,6 +9,7 @@ import Nav from './Nav';
 import Schools from './Schools';
 import Students from './Students';
 import Student from './Student';
+import School from './School';
 
 class Main extends Component {
   componentDidMount () {
@@ -22,9 +23,10 @@ class Main extends Component {
       <div>
         <Nav />
         <hr />
-        <Route path="/schools" component={Schools} />
+        <Route path="/schools" exact component={Schools} />
         <Route path="/students" exact component={Students} />
         <Route path="/students/:id" render={(props) => <Student {...props} />} />
+        <Route path="/schools/:id" render={(props) => <School {...props} />} />
         <hr />
       </div>
     </Router>)
