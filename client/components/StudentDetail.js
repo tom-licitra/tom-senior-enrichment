@@ -16,6 +16,7 @@ const StudentDetail = ({ props, student, deleteStudent }) => {
       <br />
       <button type="button" onClick={() => deleteStudent(student)}>Delete Student</button>
       <button type="button"><Link to={props.location.pathname + '/edit'}>Edit Student</Link></button>
+      <button type="button"><Link to="/students">Return to Students</Link></button>
     </div>
   )
 }

@@ -27,19 +27,22 @@ class SchoolEditForm extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
-    this.props.updateSchool(this.props.school.id, this.state);
-    this.props.history.push(`/schools/${this.props.school.id}`);
+    const { school } = this.props;
+    this.props.updateSchool(school.id, this.state);
+    this.props.history.push(`/schools/${school.id}`);
   }
 
   handleEnrollment (evt) {
     evt.preventDefault();
-    this.props.updateStudent(evt.target.studentId.value, {schoolId: this.props.school.id * 1});
+    const { updateStudent, school } = this.props;
+    updateStudent(evt.target.studentId.value, {schoolId: school.id});
   }
 
   render () {
     const { students, potentialStudents, school, history } = this.props;
     return (
       <div className="schoolForm">
+        <button type="button"><Link to={`/schools/${school.id}`}>Return to School</Link></button>
         <form onSubmit={this.handleSubmit}>
           <label>Name</label>
           <input name="name" value={this.state.name} onChange={this.handleChange} />
@@ -59,7 +62,7 @@ class SchoolEditForm extends Component {
           <label>Description</label>
           <textarea rows="6" cols="40" name="description" value={this.state.description} onChange={this.handleChange} />
           <br />
-          <button type="submit">Save</button>
+          <button type="submit">Submit</button>
         </form>
         <button type="button" onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
         <div className="schoolFormStudents">

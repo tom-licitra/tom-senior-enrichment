@@ -51,7 +51,7 @@ class SchoolAddForm extends Component {
           <label>Description</label>
           <textarea rows="6" cols="40" name="description" value={this.state.description} onChange={this.handleChange} />
           <br />
-          <button type="submit">Save</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     )

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import StudentDetail from './StudentDetail';
-import StudentForm from './StudentForm';
+import StudentEditForm from './StudentEditForm';
 import StudentAddForm from './StudentAddForm';
 import { deleteStudent } from '../store';
 
@@ -13,7 +13,7 @@ const Student = ({ student, deleteStudent }) => {
       <Router>
         <Switch>
           <Route exact path="/students/:id" render={(props) => {return (<StudentDetail props={props} student={student} deleteStudent={deleteStudent} />)} } />
-          <Route exact path="/students/:id/edit" render={(props) => <StudentForm student={student} props={props} /> } />
+          <Route exact path="/students/:id/edit" render={(props) => <StudentEditForm student={student} props={props} /> } />
         </Switch>
       </Router>
     )

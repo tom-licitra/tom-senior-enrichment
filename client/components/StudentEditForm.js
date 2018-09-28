@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { updateStudent } from '../store';
 
-class StudentForm extends Component {
+class StudentEditForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -31,6 +32,7 @@ class StudentForm extends Component {
     const { student, schools } = this.props;
     return (
       <div className="studentForm">
+        <button type="button"><Link to={`/students/${student.id}`}>Return to Student</Link></button>
         <form onSubmit={this.handleSubmit}>
           <label>First Name</label>
           <input name="firstName" value={this.state.firstName} onChange={this.handleChange} />
@@ -68,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateStudent: (id, data) => dispatch(updateStudent(id, data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentEditForm);

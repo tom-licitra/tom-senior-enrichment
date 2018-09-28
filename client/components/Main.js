@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 import { getSchools, getStudents } from '../store';
 import Nav from './Nav';
@@ -20,24 +20,22 @@ class Main extends Component {
   render () {
     return (
     <Router>
-      <div>
+      <div id="app">
         <Nav />
         <hr />
         <Route path="/schools" exact component={Schools} />
         <Route path="/students" exact component={Students} />
-        <Route path="/students/:id" render={(props) => <Student {...props} />} />
-        <Route path="/schools/:id" render={(props) => <School {...props} />} />
+        <Route path="/students/:id" component={Student} />
+        <Route path="/schools/:id" component={School} />
         <hr />
       </div>
     </Router>)
   }
 }
 
-const mapStateToProps = (state) => ({state});
-
 const mapDispatchToProps = (dispatch) => ({
   getSchools: () => dispatch(getSchools()),
   getStudents: () => dispatch(getStudents())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(null, mapDispatchToProps)(Main);
