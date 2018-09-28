@@ -47,7 +47,7 @@ export const deleteSchool = (school, history) => {
       .then(() => axios.get('/api/students')
         .then(res => res.data)
         .then(students => dispatch(setStudents(students))))
-      .then(() => history.push("/schools"))
+      .then(() => !!history && history.push("/schools"))
     }
 }
 
@@ -78,7 +78,7 @@ export const getStudents = () => {
   }
 }
 
-export const deleteStudent = (student) => {
+export const deleteStudent = (student, history) => {
   return (dispatch) => {
     const id = student.id;
     axios.delete(`/api/students/${id}`)
@@ -86,6 +86,7 @@ export const deleteStudent = (student) => {
       .then(() => axios.get('/api/schools')
         .then(res => res.data)
         .then(schools => dispatch(setSchools(schools))))
+      .then(() => !!history && history.push("/students"))
   }
 }
 

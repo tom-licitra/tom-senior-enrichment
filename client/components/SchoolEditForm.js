@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateSchool, getStudents, updateStudent, deleteSchool } from '../store';
+import { updateSchool, getStudents, updateStudent, deleteSchool, deleteStudent } from '../store';
 
 class SchoolEditForm extends Component {
   constructor (props) {
@@ -78,7 +78,12 @@ class SchoolEditForm extends Component {
           </form>
           <ul>
             {
-            students.map( student => <li key={student.id}><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></li>)
+            students.map( student => (
+              <li key={student.id}>
+                <Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link>
+                <button type="button" onClick={() => this.props.updateStudent(student.id, {schoolId: '0'})}>Unenroll Student</button>
+                <button type="button" onClick={() => this.props.deleteStudent(student)}>Delete Student</button>
+              </li>))
             }
           </ul>
         </div>
@@ -104,7 +109,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   updateSchool: (id, data) => dispatch(updateSchool(id, data)),
   deleteSchool: (school, history) => dispatch(deleteSchool(school, history)),
-  updateStudent: (id, data) => dispatch(updateStudent(id, data))
+  updateStudent: (id, data) => dispatch(updateStudent(id, data)),
+  deleteStudent: (student, history) => dispatch(deleteStudent(student, history))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolEditForm);
