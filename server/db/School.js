@@ -20,7 +20,7 @@ const School = conn.define('school', {
     type: Sequelize.STRING
     // add validation
   },
-  zip_code: {
+  zipCode: {
     type: Sequelize.INTEGER
     // add validation
   },

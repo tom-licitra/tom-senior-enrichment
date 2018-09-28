@@ -12,11 +12,11 @@ const createSchools = (num) => {
   let schools = [];
   for (let i = 0; i < num; i++) {
     let newSchool = {}
-    newSchool.name = `${chance.name()} ${Math.random() > 0.5 ? 'Elementary' : 'High'} School`;
+    newSchool.name = `${chance.name()} High School`;
     newSchool.address = chance.address();
     newSchool.city = chance.city();
     newSchool.state = chance.state();
-    newSchool.zip_code = chance.zip();
+    newSchool.zipCode = chance.zip();
     newSchool.description = chance.paragraph({sentences: 2});
     schools.push(newSchool);
   }
@@ -55,6 +55,7 @@ const seed = async () => {
 const syncAndSeed = () => {
   sync()
     .then(() => seed())
+    .then(() => console.log("Seeded database!"))
 }
 
 syncAndSeed();

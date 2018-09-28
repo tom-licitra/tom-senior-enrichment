@@ -9,13 +9,14 @@ const SchoolDetail = ({school, deleteSchool, props}) => {
     <div className="school">
       <h2>{school.name}</h2>
       <div className="schoolDetails">
-        <div>Address: {school.address} {school.city}, {school.state} {school.zip_code}</div>
+        <div>Address: {school.address} {school.city}, {school.state} {school.zipCode}</div>
         <br />
         <div>Description: {school.description}</div>
       </div>
       <br />
-      <button type="button" onClick={() => deleteSchool(school)}>Delete School</button>
+      <button type="button" onClick={() => deleteSchool(school, props.history)}>Delete School</button>
       <button type="button"><Link to={props.location.pathname + '/edit'}>Edit School</Link></button>
+      <button type="button"><Link to="/schools">Back</Link></button>
     </div>
   )
 }
@@ -26,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteSchool: (school) => dispatch(deleteSchool(school))
+  deleteSchool: (school, history) => dispatch(deleteSchool(school, history))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolDetail);

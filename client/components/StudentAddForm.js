@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 import { createStudent } from '../store';
 
 class StudentAddForm extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       firstName: '',
       lastName: '',
       gpa: '',
-      schoolId: 0
+      schoolId: this.props.schoolId
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log(this.props);
   }  
 
   handleChange (evt) {
@@ -32,7 +33,7 @@ class StudentAddForm extends Component {
   }
 
   render () {
-    const { schools } = this.props;
+    const { schools, schoolId } = this.props;
     return (
       <div className="studentForm">
         <form onSubmit={this.handleSubmit}>
@@ -46,7 +47,7 @@ class StudentAddForm extends Component {
           <input name="gpa" value={this.state.gpa} onChange={this.handleChange} />
           <br />
           <label>Enrolled at</label>
-            <select name="schoolId" onChange={this.handleChange}>
+            <select name="schoolId" defaultValue={schoolId} onChange={this.handleChange}>
               <option value={0}>Not enrolled</option>
               {schools.map( school => { return (
                 <option key={school.id} value={school.id}>
@@ -63,7 +64,8 @@ class StudentAddForm extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   schools: state.schools,
-  history: ownProps.props.history
+  history: ownProps.props.history,
+  schoolId: ownProps.props.location.search.length > 0 ? ownProps.props.location.search.split("=").pop() : 0
 })
 
 const mapDispatchToProps = (dispatch) => ({
