@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createStudent } from '../store';
+import { createStudent } from '../store/students';
 
 class StudentAddForm extends Component {
   constructor (props) {
@@ -25,7 +25,7 @@ class StudentAddForm extends Component {
   handleSubmit (evt) {
     evt.preventDefault();
     if (!this.state.schoolId) {
-       const { schoolId, ...stateData } = this.state;
+       const { schoolId, ...stateData } = this.state; // excludes schoolId from req.body
        this.props.createStudent(stateData)
     }
     else { this.props.createStudent(this.state) }

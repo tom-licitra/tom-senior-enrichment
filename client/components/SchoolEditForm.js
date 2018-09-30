@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateSchool, getStudents, updateStudent, deleteSchool, deleteStudent } from '../store';
+
+import { updateSchool, deleteSchool } from '../store/schools';
+import { updateStudent, deleteStudent } from '../store/students';
+import SchoolStudents from './SchoolStudents';
 
 class SchoolEditForm extends Component {
   constructor (props) {
     super(props);
+    const { school } = props;
     this.state = {
-      name: props.school.name,
-      address: props.school.address,
-      city: props.school.city,
-      state: props.school.state,
-      zipCode: props.school.zipCode,
-      description: props.school.description
+      name: school.name,
+      address: school.address,
+      city: school.city,
+      state: school.state,
+      zipCode: school.zipCode,
+      description: school.description
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +43,7 @@ class SchoolEditForm extends Component {
   }
 
   render () {
-    const { students, potentialStudents, school, history } = this.props;
+    const { potentialStudents, school, history } = this.props;
     return (
       <div className="schoolForm">
         <button type="button"><Link to={`/schools/${school.id}`}>Return to School</Link></button>
@@ -65,31 +69,13 @@ class SchoolEditForm extends Component {
           <button type="submit">Submit</button>
         </form>
         <button type="button" onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
-        <div className="schoolFormStudents">
-          <button type="button"><Link to={`/students/create?schoolId=${school.id}`}>Add new student</Link></button>
-          <form onSubmit={this.handleEnrollment}>
-            <label>Enroll student</label>
-            <select name="studentId" onChange={this.handleChange}>
-              {
-              potentialStudents.map( student => { return (
-              <option key={student.id} value={student.id}>
-                {student.firstName} {student.lastName}
-              </option>)})
-              }
-            </select>
-            <button type="submit">Enroll Student</button>
-          </form>
-          <ul>
-            {
-            students.map( student => (
-              <li key={student.id}>
-                <Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link>
-                <button type="button" onClick={() => this.props.updateStudent(student.id, {schoolId: '0'})}>Unenroll Student</button>
-                <button type="button" onClick={() => this.props.deleteStudent(student)}>Delete Student</button>
-              </li>))
-            }
-          </ul>
-        </div>
+        <SchoolStudents
+          handleEnrollment={this.handleEnrollment}
+          updateStudent={this.props.updateStudent}
+          deleteStudent={this.props.deleteStudent}
+          school={school}
+          potentialStudents={potentialStudents}
+          students={school.students} />
       </div>
     )
   }
@@ -97,13 +83,9 @@ class SchoolEditForm extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   schools: state.schools,
-  students: state.students.filter( student => {
-    if (student.school) { return student.school.id === ownProps.school.id }
-    else { return false }
-  }),
   potentialStudents: state.students.filter(student => {
     if (student.school) { return student.school.id !== ownProps.school.id }
-    else { return true}
+    else { return false}
   }),
   school: ownProps.school,
   history: ownProps.props.history

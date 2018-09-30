@@ -5,7 +5,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import StudentDetail from './StudentDetail';
 import StudentEditForm from './StudentEditForm';
 import StudentAddForm from './StudentAddForm';
-import { deleteStudent } from '../store';
+import { deleteStudent } from '../store/students';
 
 const Student = ({ student, deleteStudent }) => {
   if ( student ) {
@@ -13,7 +13,7 @@ const Student = ({ student, deleteStudent }) => {
       <Router>
         <Switch>
           <Route exact path="/students/:id" render={(props) => {return (<StudentDetail props={props} student={student} deleteStudent={deleteStudent} />)} } />
-          <Route exact path="/students/:id/edit" render={(props) => <StudentEditForm student={student} props={props} /> } />
+          <Route path="/students/:id/edit" render={(props) => <StudentEditForm student={student} props={props} /> } />
         </Switch>
       </Router>
     )
@@ -21,7 +21,8 @@ const Student = ({ student, deleteStudent }) => {
   return (
     <Router>
       <Switch>
-        <Route path="/students/create" render={(props) => <StudentAddForm props={props} />} />
+        <Route exact path="/students/create" render={(props) => <StudentAddForm props={props} />} />
+        <Route path="/students/:id" render={() => <div className="studentNotFound">Student Not Found</div>} />
       </Switch>
     </Router>
   )

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { deleteSchool } from '../store';
+import { deleteSchool } from '../store/schools';
 
 const SchoolDetail = ({school, deleteSchool, props}) => {
   return (
