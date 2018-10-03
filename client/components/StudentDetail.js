@@ -8,16 +8,21 @@ const StudentDetail = ({ location, history, student, deleteStudent }) => {
   if (student) {
     return (
       <div className="student">
-        <h2>{student.firstName} {student.lastName}</h2>
+        <div className="toolBar">
+          <div className="pageTitle">{student.firstName} {student.lastName}</div>
+          <div className="toolButtons">
+            <button type="button" onClick={() => deleteStudent(student, history)}>Delete Student</button>
+            <Link to={location.pathname + '/edit'}><button type="button">Edit Student</button></Link>
+            <Link to="/students"><button type="button">Return to Students</button></Link>
+          </div>
+        </div>
         <div className="studentDetails">
           <div>Current GPA: {student.gpa}</div>
           <br />
           <div>Current School: {student.school ? student.school.name : "Not enrolled"}</div>
         </div>
         <br />
-        <button type="button" onClick={() => deleteStudent(student, history)}>Delete Student</button>
-        <button type="button"><Link to={location.pathname + '/edit'}>Edit Student</Link></button>
-        <button type="button"><Link to="/students">Return to Students</Link></button>
+       
       </div>
     )
   }

@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import SchoolTable from './SchoolTable';
 
 
-const Schools = ({ schools }) => {
+const Schools = ({ schools, props }) => {
   return (
     <div id="schools">
       <div className="toolBar">
         <div className="pageTitle"><b>Schools</b></div>
         <div className="toolButtons">
-        <Link to="/schools/create"><button type="button"><b>Add new school</b></button></Link>
+          <Link to="/schools/create"><button type="button">Add new school</button></Link>
         </div>
       </div>
       {schools.length > 0 ? <SchoolTable /> : null}

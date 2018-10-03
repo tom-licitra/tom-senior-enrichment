@@ -7,7 +7,12 @@ const Students = ({ students }) => {
   if (students.length > 0) {
     return (
       <div id="students">
-        <button type="button"><Link to="/students/create">Add new student</Link></button>
+        <div className="toolBar">
+          <div className="pageTitle"><b>Students</b></div>
+          <div className="toolButtons">
+            <Link to="/students/create"><button type="button">Add new student</button></Link>
+          </div>
+        </div>
         <StudentTable students={students} />
       </div>
     )

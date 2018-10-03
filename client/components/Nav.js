@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+const Nav = ({ props }) => {
+  console.log(props);
+  const { location } = props;
   return (
     <div id="header">
       <div id="titleBar">
-        <div id="title">Senior Enrichment Project</div>
+        <div id="title">Fullstack School Management Tool</div>
         <div id="login">Login</div>
       </div>
       <div id="nav">
-        <div className="navTab"><Link to="/">Home</Link></div>
-        <div className="navTab"><Link to="/schools">Schools</Link></div>
-        <div className="navTab"><Link to="/students">Students</Link></div>
+        <Link className={location.pathname === "/" ? "navTab selected" : "navTab"} to="/"><div>Dashboard</div></Link>
+        <Link className={location.pathname.indexOf("/schools") >= 0 ? "navTab selected" : "navTab"} to="/schools"><div>Schools</div></Link>
+        <Link className={location.pathname.indexOf("/students") >= 0 ? "navTab selected" : "navTab"} to="/students"><div>Students</div></Link>
       </div>
     </div>
   )

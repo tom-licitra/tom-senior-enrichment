@@ -8,17 +8,21 @@ import StudentTable from './StudentTable';
 const SchoolDetail = ({school, schoolStudents, deleteSchool, props}) => {
   return (
     <div className="school">
-      <h2>{school.name}</h2>
-      <div className="schoolDetails">
-        <div>Address: {school.address} {school.city}, {school.state} {school.zipCode}</div>
-        <br />
-        <div>Description: {school.description}</div>
+      <div className="toolBar">
+        <div className="pageTitle">{school.name}</div>
+        <div className="toolButtons">
+          <button type="button" onClick={() => deleteSchool(school, props.history)}>Delete School</button>
+          <Link to={props.location.pathname + '/edit'}><button type="button">Edit School</button></Link>
+          <Link to="/schools"><button type="button">Return to Schools</button></Link>
+        </div>
       </div>
-      <br />
-      <button type="button" onClick={() => deleteSchool(school, props.history)}>Delete School</button>
-      <button type="button"><Link to={props.location.pathname + '/edit'}>Edit School</Link></button>
-      <button type="button"><Link to="/schools">Return to Schools</Link></button>
-      <hr />
+      <div className="schoolDetails">
+        <div><b>Address:</b> {school.address} {school.city}, {school.state} {school.zipCode}</div>
+        <br />
+        <div><b>Description:</b> {school.description}</div>
+        <br />
+        <div><b>Current enrollment:</b> {school.students.length} {school.students.length === 1 ? "student" : "students"}</div>
+      </div>
       <StudentTable students={schoolStudents} />
     </div>
   )

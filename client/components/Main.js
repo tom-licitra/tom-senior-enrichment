@@ -22,8 +22,8 @@ class Main extends Component {
     return (
     <Router>
       <div id="app">
-        <Nav />
-        <Route path="/schools" exact component={Schools} />
+        <Route path="/" render={(props) => <Nav props={props} /> } />
+        <Route path="/schools" exact render={(props) => <Schools props={props} /> } />
         <Route path="/students" exact component={Students} />
         <Route path="/students/:id" component={Student} />
         <Route path="/schools/:id" component={School} />
