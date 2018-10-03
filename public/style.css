@@ -1,0 +1,57 @@
+* {
+  font-family: Verdana, Geneva, sans-serif
+}
+
+body {
+  margin: 0px;
+}
+
+#titleBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #006666;
+  color: white;
+}
+
+#nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #006666;
+}
+
+.navTab {
+  color: black;
+  background-color: gainsboro;
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.toolBar {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  background-color: gainsboro;
+}
+
+.toolBar .pageTitle {
+  font-size: 1.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10px;
+}
+
+.toolBar button {
+  padding: 10px;
+  border-radius: 15px;
+  font-size: .9em;
+  border: 2px solid white;
+  background-color: #33cccc;
+  color: black;
+}

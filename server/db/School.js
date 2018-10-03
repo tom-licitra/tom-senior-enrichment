@@ -17,12 +17,19 @@ const School = conn.define('school', {
     allowNull: false
   },
   state: {
-    type: Sequelize.STRING
-    // add validation
+    type: Sequelize.STRING,
+    validate: {
+      len: [2,2]
+    },
+    set(str) {
+      this.setDataValue('state', str.toUpperCase())
+    }
   },
   zipCode: {
-    type: Sequelize.INTEGER
-    // add validation
+    type: Sequelize.INTEGER,
+    validate: {
+      len: 5
+    }
   },
   description: {
     type: Sequelize.TEXT

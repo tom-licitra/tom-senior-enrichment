@@ -7,12 +7,14 @@ const { School, Student } = models;
 router.get('/', (req, res, next) => {
   School.findAll({include: Student})
     .then(schools => res.send(schools))
+    .catch(err => next(err))
 })
 
 router.delete('/:id', (req, res, next) => {
   School.findById(1 * req.params.id)
     .then(school => school.destroy())
     .then(() => res.sendStatus(202))
+    .catch(err => next(err))
 })
 
 router.put('/:id', (req, res, next) => {
@@ -24,6 +26,7 @@ router.put('/:id', (req, res, next) => {
       School.findById(school.id, {include: Student})
         .then( _school => res.send(_school))
     })
+    .catch(err => next(err))
 })
 
 router.post('/', (req, res, next) => {
@@ -31,7 +34,8 @@ router.post('/', (req, res, next) => {
     .then( school => {
       School.findById(school.id, {include: Student})
         .then( _school => res.send(_school))
-  })
+    })
+    .catch(err => next(err))
 })
 
 module.exports = router;

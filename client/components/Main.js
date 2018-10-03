@@ -23,7 +23,6 @@ class Main extends Component {
     <Router>
       <div id="app">
         <Nav />
-        <hr />
         <Route path="/schools" exact component={Schools} />
         <Route path="/students" exact component={Students} />
         <Route path="/students/:id" component={Student} />

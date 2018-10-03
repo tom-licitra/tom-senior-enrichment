@@ -8,7 +8,12 @@ import SchoolTable from './SchoolTable';
 const Schools = ({ schools }) => {
   return (
     <div id="schools">
-      <button type="button"><Link to="/schools/create">Add new school</Link></button>
+      <div className="toolBar">
+        <div className="pageTitle"><b>Schools</b></div>
+        <div className="toolButtons">
+        <Link to="/schools/create"><button type="button"><b>Add new school</b></button></Link>
+        </div>
+      </div>
       {schools.length > 0 ? <SchoolTable /> : null}
     </div>
   )
