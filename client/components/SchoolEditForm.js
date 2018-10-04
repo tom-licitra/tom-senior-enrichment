@@ -45,37 +45,39 @@ class SchoolEditForm extends Component {
   render () {
     const { potentialStudents, school, history } = this.props;
     return (
-      <div className="schoolForm">
-        <button type="button"><Link to={`/schools/${school.id}`}>Return to School</Link></button>
-        <form onSubmit={this.handleSubmit}>
-          <label>Name</label>
-          <input name="name" value={this.state.name} onChange={this.handleChange} />
-          <br />
-          <label>Address</label>
-          <input name="address" value={this.state.address} onChange={this.handleChange} />
-          <br />
-          <label>City</label>
-          <input name="city" value={this.state.city} onChange={this.handleChange} />
-          <br />
-          <label>State</label>
-          <input name="state" value={this.state.state} onChange={this.handleChange} />
-          <br />
-          <label>Zip Code</label>
-          <input name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
-          <br />
-          <label>Description</label>
-          <textarea rows="6" cols="40" name="description" value={this.state.description} onChange={this.handleChange} />
-          <br />
-          <button type="submit">Submit</button>
-        </form>
-        <button type="button" onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
-        <SchoolStudents
-          handleEnrollment={this.handleEnrollment}
-          updateStudent={this.props.updateStudent}
-          deleteStudent={this.props.deleteStudent}
-          school={school}
-          potentialStudents={potentialStudents}
-          students={school.students} />
+      <div id="schoolEditor">
+        <div className="toolBar">
+          <div className="pageTitle">{school.name}</div>
+          <div className="toolButtons">
+            <button type="submit" onClick={this.handleSubmit}>Save Changes</button>
+            <Link to={`/students/create?schoolId=${school.id}`}><button type="button">Add new student</button></Link>
+            <button type="button" onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
+            <Link to={`/schools/${school.id}`}><button type="button">Return to School</button></Link>
+          </div>
+        </div>
+        <div className="schoolForm">
+          <form>
+            <div>Name</div>
+            <input name="name" value={this.state.name} onChange={this.handleChange} />
+            <div>Address</div>
+            <input name="address" value={this.state.address} onChange={this.handleChange} />
+            <div>City</div>
+            <input name="city" value={this.state.city} onChange={this.handleChange} />
+            <div>State</div>
+            <input name="state" value={this.state.state} onChange={this.handleChange} />
+            <div>Zip Code</div>
+            <input name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
+            <div>Description</div>
+            <textarea rows="6" cols="40" name="description" value={this.state.description} onChange={this.handleChange} />
+          </form>
+          <SchoolStudents
+            handleEnrollment={this.handleEnrollment}
+            updateStudent={this.props.updateStudent}
+            deleteStudent={this.props.deleteStudent}
+            school={school}
+            potentialStudents={potentialStudents}
+            students={school.students} />
+        </div>
       </div>
     )
   }
@@ -85,7 +87,7 @@ const mapStateToProps = (state, ownProps) => ({
   schools: state.schools,
   potentialStudents: state.students.filter(student => {
     if (student.school) { return student.school.id !== ownProps.school.id }
-    else { return false}
+    else { return true}
   }),
   school: ownProps.school,
   history: ownProps.props.history

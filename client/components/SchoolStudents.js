@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 const SchoolStudents = ({ handleEnrollment, updateStudent, deleteStudent, school, potentialStudents, students }) => {
   return (
     <div className="schoolFormStudents">
-      <button type="button"><Link to={`/students/create?schoolId=${school.id}`}>Add new student</Link></button>
       <form onSubmit={handleEnrollment}>
-        <label>Enroll student</label>
+        <div>Enroll new student</div>
         <select name="studentId" >
           {
           potentialStudents.map( student => { return (
@@ -15,18 +14,27 @@ const SchoolStudents = ({ handleEnrollment, updateStudent, deleteStudent, school
           </option>)})
           }
         </select>
-        <button type="submit">Enroll Student</button>
+        <button id="enrollButton" type="submit">Enroll Student</button>
       </form>
-      <ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Unenroll</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
         {
         students.map( student => (
-          <li key={student.id}>
-            <Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link>
-            <button type="button" onClick={() => updateStudent(student.id, {schoolId: '0'})}>Unenroll Student</button>
-            <button type="button" onClick={() => deleteStudent(student)}>Delete Student</button>
-          </li>))
+          <tr key={student.id}>
+            <td><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></td>
+            <td><button type="button" onClick={() => updateStudent(student.id, {schoolId: '0'})}>Unenroll Student</button></td>
+            <td><button type="button" onClick={() => deleteStudent(student)}>Delete Student</button></td>
+          </tr>))
         }
-      </ul>
+        </tbody>
+      </table>
     </div>
   )
 }

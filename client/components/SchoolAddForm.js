@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { createSchool } from '../store/schools';
 
@@ -32,28 +33,36 @@ class SchoolAddForm extends Component {
 
   render () {
     return (
-      <div className="schoolForm">
-        <form onSubmit={this.handleSubmit}>
-          <label>Name</label>
-          <input name="name" value={this.state.name} onChange={this.handleChange} />
-          <br />
-          <label>Address</label>
-          <input name="address" value={this.state.address} onChange={this.handleChange} />
-          <br />
-          <label>City</label>
-          <input name="city" value={this.state.city} onChange={this.handleChange} />
-          <br />
-          <label>State</label>
-          <input name="state" value={this.state.state} onChange={this.handleChange} />
-          <br />
-          <label>Zip Code</label>
-          <input name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
-          <br />
-          <label>Description</label>
-          <textarea rows="6" cols="40" name="description" value={this.state.description} onChange={this.handleChange} />
-          <br />
-          <button type="submit">Submit</button>
-        </form>
+      <div>
+        <div className="toolBar">
+          <div className="pageTitle">Add New School</div>
+          <div className="toolButtons">
+            <button type="submit" onClick={this.handleSubmit}>Save School</button>
+            <Link to="/schools"><button type="button">Return to Schools</button></Link>
+          </div>
+        </div>
+        <div className="schoolForm">
+          <form onSubmit={this.handleSubmit}>
+            <div>Name</div>
+            <input name="name" value={this.state.name} onChange={this.handleChange} />
+            <br />
+            <div>Address</div>
+            <input name="address" value={this.state.address} onChange={this.handleChange} />
+            <br />
+            <div>City</div>
+            <input name="city" value={this.state.city} onChange={this.handleChange} />
+            <br />
+            <div>State</div>
+            <input name="state" value={this.state.state} onChange={this.handleChange} />
+            <br />
+            <div>Zip Code</div>
+            <input name="zipCode" value={this.state.zipCode} onChange={this.handleChange} />
+            <br />
+            <div>Description</div>
+            <textarea rows="6" cols="80" name="description" value={this.state.description} onChange={this.handleChange} />
+            <br />
+          </form>
+        </div>
       </div>
     )
   }

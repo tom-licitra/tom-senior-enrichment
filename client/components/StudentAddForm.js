@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createStudent } from '../store/students';
 
 class StudentAddForm extends Component {
@@ -35,28 +36,33 @@ class StudentAddForm extends Component {
   render () {
     const { schools, schoolId } = this.props;
     return (
-      <div className="studentForm">
-        <form onSubmit={this.handleSubmit}>
-          <label>First Name</label>
-          <input name="firstName" value={this.state.firstName} onChange={this.handleChange} />
-          <br />
-          <label>Last Name</label>
-          <input name="lastName" value={this.state.lastName} onChange={this.handleChange} />
-          <br />
-          <label>GPA</label>
-          <input name="gpa" value={this.state.gpa} onChange={this.handleChange} />
-          <br />
-          <label>Enrolled at</label>
-            <select name="schoolId" defaultValue={schoolId} onChange={this.handleChange}>
-              <option value={0}>Not enrolled</option>
-              {schools.map( school => { return (
-                <option key={school.id} value={school.id}>
-                  {school.name}
-                </option>)})
-              }
-            </select>
-          <button type="submit">Save</button>
-        </form>
+      <div>
+        <div className="toolBar">
+          <div className="pageTitle">Add New Student</div>
+          <div className="toolButtons">
+            <button type="submit" onClick={this.handleSubmit}>Save Student</button>
+            <Link to="/students"><button type="button">Return to Students</button></Link>
+          </div>
+        </div>
+        <div className="studentForm">
+          <form onSubmit={this.handleSubmit}>
+            <div>First Name</div>
+            <input name="firstName" value={this.state.firstName} onChange={this.handleChange} />
+            <div>Last Name</div>
+            <input name="lastName" value={this.state.lastName} onChange={this.handleChange} />
+            <div>GPA</div>
+            <input name="gpa" value={this.state.gpa} onChange={this.handleChange} />
+            <div>Enrolled at</div>
+              <select name="schoolId" defaultValue={schoolId} onChange={this.handleChange}>
+                <option value={0}>Not enrolled</option>
+                {schools.map( school => { return (
+                  <option key={school.id} value={school.id}>
+                    {school.name}
+                  </option>)})
+                }
+              </select>
+          </form>
+        </div>
       </div>
     )
   }

@@ -17,7 +17,7 @@ const SchoolDetail = ({school, schoolStudents, deleteSchool, props}) => {
         </div>
       </div>
       <div className="schoolDetails">
-        <div><b>Address:</b> {school.address} {school.city}, {school.state} {school.zipCode}</div>
+        <div><b>Address:</b> {school.address}, {school.city}, {school.state} {school.zipCode}</div>
         <br />
         <div><b>Description:</b> {school.description}</div>
         <br />

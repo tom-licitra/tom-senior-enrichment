@@ -17,9 +17,9 @@ const StudentDetail = ({ location, history, student, deleteStudent }) => {
           </div>
         </div>
         <div className="studentDetails">
-          <div>Current GPA: {student.gpa}</div>
+          <div><b>Current GPA:</b> {student.gpa}</div>
           <br />
-          <div>Current School: {student.school ? student.school.name : "Not enrolled"}</div>
+          <div><b>Current School:</b> {student.school ? student.school.name : "Not enrolled"}</div>
         </div>
         <br />
        

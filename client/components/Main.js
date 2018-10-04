@@ -27,7 +27,6 @@ class Main extends Component {
         <Route path="/students" exact component={Students} />
         <Route path="/students/:id" component={Student} />
         <Route path="/schools/:id" component={School} />
-        <hr />
       </div>
     </Router>)
   }
