@@ -1,3 +1,5 @@
+/*eslint-disable complexity*/
+
 import axios from 'axios';
 import { setStudents } from './students';
 
@@ -5,17 +7,38 @@ const initialState = {
   schools: []
 }
 
+// HELPER FUNC
+const tableSorter = (a, b, tableSort, fieldName) => {
+  let aLength = a.students ? a.students.length : 0;
+  let bLength = b.students ? b.students.length : 0;
+  if (fieldName === 'enrollment' && tableSort.fieldName === fieldName && tableSort.asc) {
+    return aLength > bLength ? -1 : 1
+  }
+  else if (fieldName === 'enrollment') {
+    console.log(aLength + bLength);
+    return aLength <= bLength ? -1 : 1
+  }
+  else if (tableSort.fieldName === fieldName && tableSort.asc) {
+      return a[fieldName] > b[fieldName] ? -1 : 1;
+  }
+  else {
+      return a[fieldName] <= b[fieldName] ? -1 : 1;
+  }
+}
+
 // ACTION TYPES
 const SET_SCHOOLS = 'SET_SCHOOLS';
 const DELETE_SCHOOL = 'DELETE_SCHOOL';
 const UPDATE_SCHOOL = 'UPDATE_SCHOOL';
 const CREATE_SCHOOL = 'CREATE_SCHOOL';
+const SORT_SCHOOLS = 'SORT_SCHOOLS';
 
 // ACTION CREATORS
 export const setSchools = (schools) => ({ type: SET_SCHOOLS, schools });
 const _deleteSchool = (school) => ({ type: DELETE_SCHOOL, school });
 const _updateSchool = (school) => ({ type: UPDATE_SCHOOL, school });
 const _createSchool = (school) => ({ type: CREATE_SCHOOL, school });
+export const sortSchools = (fieldName, tableSort) => ({type: SORT_SCHOOLS, fieldName, tableSort});
 
 // THUNK CREATORS
 export const getSchools = () => {
@@ -67,6 +90,8 @@ const schoolsReducer = (schools = initialState.schools, action) => {
       return schools.map( school => (school.id === action.school.id ? action.school : school))
     case CREATE_SCHOOL:
       return [...schools, action.school]
+    case SORT_SCHOOLS:
+      return [...schools].sort((a, b) => tableSorter(a, b, action.tableSort, action.fieldName))
     default:
       return schools
   }

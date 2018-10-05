@@ -5,17 +5,29 @@ const initialState = {
   students: []
 }
 
+// HELPER FUNCTIONS
+const tableSorter = (a, b, tableSort, fieldName) => {
+  if (tableSort.fieldName === fieldName && tableSort.asc) {
+      return a[fieldName] > b[fieldName] ? -1 : 1;
+  }
+  else {
+      return a[fieldName] <= b[fieldName] ? -1 : 1;
+  }
+}
+
 // ACTION TYPES
 const SET_STUDENTS = 'SET_STUDENTS';
 const DELETE_STUDENT = 'DELETE_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const CREATE_STUDENT = 'CREATE_STUDENT';
+const SORT_STUDENTS = 'SORT_STUDENTS';
 
 // ACTION CREATORS
 export const setStudents = (students) => ({ type: SET_STUDENTS, students });
 const _deleteStudent = (student) => ({ type: DELETE_STUDENT, student });
 const _updateStudent = (student) => ({ type: UPDATE_STUDENT, student });
 const _createStudent = (student) => ({ type: CREATE_STUDENT, student });
+export const sortStudents = (fieldName, tableSort) => ({type: SORT_STUDENTS, fieldName, tableSort});
 
 // THUNK CREATORS
 export const getStudents = () => {
@@ -72,6 +84,8 @@ const studentsReducer = (students = initialState.students, action) => {
       return students.map( student => (student.id === action.student.id ? action.student : student))
     case CREATE_STUDENT:
       return [...students, action.student]
+    case SORT_STUDENTS:
+      return [...students].sort((a, b) => tableSorter(a, b, action.tableSort, action.fieldName))
     default:
       return students
   }
