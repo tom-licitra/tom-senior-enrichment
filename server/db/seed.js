@@ -4,6 +4,7 @@ const chance = new Chance();
 const conn = require('./conn');
 const School = require('./School');
 const Student = require('./Student');
+const User = require('./User');
 
 const schoolCount = 5;
 const studentCount = 25;
@@ -38,6 +39,7 @@ const createStudents = (num) => {
 const sync = () => conn.sync({force: true});
 
 const seed = async () => {
+  await User.create({email: 'test@test.com', password: 'test'})
   const schools = await Promise.all(createSchools(schoolCount).map( school => {
       return School.create(school)
     }))
