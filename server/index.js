@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const { syncAndSeed } = require('./db');
+
 app.use('/api', require('./api'));
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
@@ -15,4 +17,9 @@ app.use((err, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 8080;
-app.listen( PORT, console.log(`App listening on port ${PORT}`));
+const init = () => {
+  syncAndSeed();
+  app.listen( PORT, console.log(`App listening on port ${PORT}`));
+}
+
+init();
