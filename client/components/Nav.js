@@ -7,7 +7,7 @@ const Nav = ({ props }) => {
     <div id="header">
       <div id="titleBar">
         <div id="title">Fullstack School Management Tool</div>
-        <div id="login">Login</div>
+        {/* <div id="login">Login</div> */}
       </div>
       <div id="nav">
         <Link className={location.pathname === "/" ? "navTab selected" : "navTab"} to="/"><div>Dashboard</div></Link>
