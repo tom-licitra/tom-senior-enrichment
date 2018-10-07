@@ -7,6 +7,14 @@ const initialState = {
 
 // HELPER FUNCTIONS
 const tableSorter = (a, b, tableSort, fieldName) => {
+  let aSchoolName = a.schoolId ? a.school.name : 'Not enrolled';
+  let bSchoolName = b.schoolId ? b.school.name : 'Not enrolled';
+  if (fieldName === 'schoolName' && tableSort.fieldName === fieldName && tableSort.asc) {
+    return aSchoolName > bSchoolName ? -1 : 1
+  }
+  else if (fieldName === 'schoolName') {
+    return aSchoolName <= bSchoolName ? -1 : 1
+  }
   if (tableSort.fieldName === fieldName && tableSort.asc) {
       return a[fieldName] > b[fieldName] ? -1 : 1;
   }

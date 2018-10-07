@@ -60,6 +60,6 @@ const syncAndSeed = () => {
     .then(() => console.log("Seeded database!"))
 }
 
-syncAndSeed();
+// syncAndSeed();
 
 module.exports = syncAndSeed;

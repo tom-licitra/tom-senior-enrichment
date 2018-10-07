@@ -34,7 +34,7 @@ class StudentTable extends Component {
             <th onClick={() => this.handleSort('lastName')}>Last Name {fieldName === 'lastName' ? <img src="/sort-default.png" /> : ""}</th>
             <th onClick={() => this.handleSort('firstName')}>First Name {fieldName === 'firstName' ? <img src="/sort-default.png" /> : ""}</th>
             <th onClick={() => this.handleSort('gpa')}>GPA {fieldName === 'gpa' ? <img src="/sort-default.png" /> : ""}</th>
-            <th>School</th>
+            <th onClick={() => this.handleSort('schoolName')}>School {fieldName === 'schoolName' ? <img src="/sort-default.png" /> : ""}</th>
             <th>Edit Student</th>
           </tr>
         </thead>
