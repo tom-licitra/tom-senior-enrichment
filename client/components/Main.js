@@ -24,7 +24,7 @@ class Main extends Component {
     <Router>
       <div id="app">
         <Route path="/" render={(props) => <Nav props={props} /> } />
-        <Route path="/" exact component={Dashboard} />
+        <Route path="/" exact render={(props) => <Dashboard props={props} />} />
         <Route path="/schools" exact render={(props) => <Schools props={props} /> } />
         <Route path="/students" exact component={Students} />
         <Route path="/students/:id" component={Student} />

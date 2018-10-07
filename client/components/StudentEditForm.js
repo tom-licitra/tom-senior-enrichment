@@ -38,8 +38,8 @@ class StudentEditForm extends Component {
         <div className="toolBar">
           <div className="pageTitle">{student.firstName} {student.lastName}</div>
           <div className="toolButtons">
-            <button type="submit" onClick={this.handleSubmit}>Save Changes</button>
-            <button type="button" onClick={() => deleteStudent(student, history)}>Delete Student</button>
+            <button type="submit" style={{"background-color": "#c6ecc6"}} onClick={this.handleSubmit}>Save Changes</button>
+            <button type="button" style={{"background-color": "#ffcccc"}} onClick={() => deleteStudent(student, history)}>Delete Student</button>
             <Link to={`/students/${student.id}`}><button type="button">Return to Student</button></Link>
           </div>
         </div>

@@ -11,8 +11,8 @@ const StudentDetail = ({ location, history, student, deleteStudent }) => {
         <div className="toolBar">
           <div className="pageTitle">{student.firstName} {student.lastName}</div>
           <div className="toolButtons">
-            <button type="button" onClick={() => deleteStudent(student, history)}>Delete Student</button>
-            <Link to={location.pathname + '/edit'}><button type="button">Edit Student</button></Link>
+            <button type="button" style={{"background-color": "#ffcccc"}} onClick={() => deleteStudent(student, history)}>Delete Student</button>
+            <Link to={location.pathname + '/edit'}><button style={{"background-color": "#c6ecc6"}} type="button">Edit Student</button></Link>
             <Link to="/students"><button type="button">Return to Students</button></Link>
           </div>
         </div>

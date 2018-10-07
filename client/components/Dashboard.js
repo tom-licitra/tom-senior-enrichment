@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const getAvgGpa = (school) => {
   if (school.students) {
@@ -11,18 +12,18 @@ const getAvgGpa = (school) => {
   return 0;
 }
 
-const Dashboard = ({schools, students, highestEnrollmentSchool, highestAvgGpaSchool, highestGpaStudent, enrollmentPercentage}) => {
+const Dashboard = ({ history, schools, students, highestEnrollmentSchool, highestAvgGpaSchool, highestGpaStudent, enrollmentPercentage}) => {
   if (schools) {
     return (
       <div id="dashboard">
         <div className="dashboardPanel">
           <div className="dashboardFact">
             <div className="dashboardTitle">Total Schools</div>
-            <div className="dashboardValue">{ schools ? schools.length : 0} schools</div>
+            <div className="dashboardValue" onClick={() => history.push("/schools")}>{ schools ? schools.length : 0} schools</div>
           </div>
           <div className="dashboardFact">
             <div className="dashboardTitle">Highest Enrollment</div>
-            <div className="dashboardValue">
+            <div className="dashboardValue" onClick={() => history.push(`/schools/${highestEnrollmentSchool.id}`)}>
               {highestEnrollmentSchool.name}
               <br />
               ({highestEnrollmentSchool.students.length} students)
@@ -30,7 +31,7 @@ const Dashboard = ({schools, students, highestEnrollmentSchool, highestAvgGpaSch
           </div>
           <div className="dashboardFact">
             <div className="dashboardTitle">Highest Avg GPA</div>
-            <div className="dashboardValue">
+            <div className="dashboardValue" onClick={() => history.push(`/schools/${highestAvgGpaSchool.id}`)}>
               {highestAvgGpaSchool.name}
               <br />
               ({Math.round(100 * getAvgGpa(highestAvgGpaSchool)) / 100})
@@ -40,11 +41,11 @@ const Dashboard = ({schools, students, highestEnrollmentSchool, highestAvgGpaSch
         <div className="dashboardPanel">
           <div className="dashboardFact">
             <div className="dashboardTitle">Total Students</div>
-            <div className="dashboardValue">{ students ? students.length : 0} students</div>
+            <div className="dashboardValue" onClick={() => history.push("/students")}>{ students ? students.length : 0} students</div>
           </div>
           <div className="dashboardFact">
             <div className="dashboardTitle">Enrollment Percentage</div>
-            <div className="dashboardValue">
+            <div className="dashboardValue" onClick={() => history.push("/students")}>
               {enrollmentPercentage}%
               <br />
               ({ students ? students.filter(student => !!student.schoolId).length : 0 }/{students.length})
@@ -52,7 +53,7 @@ const Dashboard = ({schools, students, highestEnrollmentSchool, highestAvgGpaSch
           </div>
           <div className="dashboardFact">
             <div className="dashboardTitle">Highest GPA</div>
-            <div className="dashboardValue">
+            <div className="dashboardValue" onClick={() => history.push(`/students/${highestGpaStudent.id}`)}>
               {highestGpaStudent.firstName} {highestGpaStudent.lastName}
               <br />
               ({highestGpaStudent.gpa})
@@ -65,7 +66,8 @@ const Dashboard = ({schools, students, highestEnrollmentSchool, highestAvgGpaSch
   else { return <div>Loading...</div>}
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+  history: ownProps.props.history,
   schools: state.schools,
   students: state.students,
   highestEnrollmentSchool: state.schools.reduce((topSchool, school) => {

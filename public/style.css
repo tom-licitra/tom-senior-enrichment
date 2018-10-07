@@ -97,7 +97,12 @@ body {
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  font-size: 1.1em
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.dashboardValue > a {
+  text-decoration: none;
 }
 
 .toolBar {
@@ -146,6 +151,11 @@ th {
   border: 3px solid white;
   background-color: gainsboro;
   padding: 5px;
+  cursor: pointer;
+}
+
+th > img {
+  height: 1em;
 }
 
 td {

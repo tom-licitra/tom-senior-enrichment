@@ -11,8 +11,8 @@ const SchoolDetail = ({school, schoolStudents, deleteSchool, props}) => {
       <div className="toolBar">
         <div className="pageTitle">{school.name}</div>
         <div className="toolButtons">
-          <button type="button" onClick={() => deleteSchool(school, props.history)}>Delete School</button>
-          <Link to={props.location.pathname + '/edit'}><button type="button">Edit School</button></Link>
+          <button type="button" style={{"background-color": "#ffcccc"}} onClick={() => deleteSchool(school, props.history)}>Delete School</button>
+          <Link to={props.location.pathname + '/edit'}><button type="button" style={{"background-color": "#c6ecc6"}} >Edit School</button></Link>
           <Link to="/schools"><button type="button">Return to Schools</button></Link>
         </div>
       </div>

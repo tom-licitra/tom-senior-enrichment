@@ -30,7 +30,7 @@ const SchoolStudents = ({ handleEnrollment, updateStudent, deleteStudent, school
           <tr key={student.id}>
             <td><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></td>
             <td><button type="button" onClick={() => updateStudent(student.id, {schoolId: '0'})}>Unenroll Student</button></td>
-            <td><button type="button" onClick={() => deleteStudent(student)}>Delete Student</button></td>
+            <td><button type="button" style={{"background-color": "#ffcccc"}} onClick={() => deleteStudent(student)}>Delete Student</button></td>
           </tr>))
         }
         </tbody>

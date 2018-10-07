@@ -49,9 +49,9 @@ class SchoolEditForm extends Component {
         <div className="toolBar">
           <div className="pageTitle">{school.name}</div>
           <div className="toolButtons">
-            <button type="submit" onClick={this.handleSubmit}>Save Changes</button>
+            <button type="submit" style={{"background-color": "#c6ecc6"}} onClick={this.handleSubmit}>Save Changes</button>
             <Link to={`/students/create?schoolId=${school.id}`}><button type="button">Add new student</button></Link>
-            <button type="button" onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
+            <button type="button" style={{"background-color": "#ffcccc"}} onClick={() => this.props.deleteSchool(school, history)}>Delete School</button>
             <Link to={`/schools/${school.id}`}><button type="button">Return to School</button></Link>
           </div>
         </div>

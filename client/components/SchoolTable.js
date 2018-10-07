@@ -31,10 +31,10 @@ class SchoolTable extends Component {
       <table className="schoolTable">
         <thead>
           <tr>
-            <th onClick={() => this.handleSort('name')}>Name{fieldName === 'name' ? " *" : ""}</th>
-            <th onClick={() => this.handleSort('enrollment')}>Students Enrolled{fieldName === 'enrollment' ? " *" : ""}</th>
-            <th onClick={() => this.handleSort('city')}>City{fieldName === 'city' ? " *" : ""}</th>
-            <th onClick={() => this.handleSort('state')}>State{fieldName === 'state' ? " *" : ""}</th>
+            <th onClick={() => this.handleSort('name')}>Name {fieldName === 'name' ? <img src="/sort-default.png" /> : ""}</th>
+            <th onClick={() => this.handleSort('enrollment')}>Students Enrolled {fieldName === 'enrollment' ? <img src="/sort-default.png" /> : ""}</th>
+            <th onClick={() => this.handleSort('city')}>City {fieldName === 'city' ? <img src="/sort-default.png" /> : ""}</th>
+            <th onClick={() => this.handleSort('state')}>State {fieldName === 'state' ? <img src="/sort-default.png" /> : ""}</th>
             <th>Edit School</th>
           </tr>
         </thead>
